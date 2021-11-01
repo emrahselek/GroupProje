@@ -25,7 +25,7 @@ public class ExcelUtil {
         }
     }
     public List<Map<String, String>> getDataList() {
-        System.out.println("name");
+
 
         List<String> columns = getColumnsNames();
 
