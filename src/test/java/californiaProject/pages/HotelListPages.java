@@ -1,4 +1,4 @@
 package californiaProject.pages;
 
-public class MainPage {
+public class HotelListPages {
 }
