@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.nio.file.WatchEvent;
+
 public class RoomReservationPages {
 
     public RoomReservationPages(){
@@ -88,12 +90,20 @@ public class RoomReservationPages {
     @FindBy (xpath = "//input[@id=\"Approved\"]")
     public WebElement approved;
 
-    //
+    //ispaid
     @FindBy(xpath = "//input[@id=\"IsPaid\"]")
     public WebElement isPaid;
 
-    //
+    //save button
     @FindBy(xpath = "//button[@id=\"btnSubmit\"]")
     public WebElement saveButton;
+
+    //successfully message
+    @FindBy(xpath = "//div[.='RoomReservation was inserted successfully']")
+    public WebElement popupMessage;
+
+    //ok popup
+    @FindBy(xpath = "//button[@class=\"btn btn-primary\"]")
+    public WebElement clickOk;
 
 }
