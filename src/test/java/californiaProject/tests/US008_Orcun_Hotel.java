@@ -4,8 +4,6 @@ import californiaProject.pages.RoomReservationPages;
 import californiaProject.utilities.ConfigReader;
 import californiaProject.utilities.Driver;
 import californiaProject.utilities.ReusableMethods;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,7 +38,7 @@ public class US008_Orcun_Hotel {
         selectFirstIDUser.selectByVisibleText("manager");
         Select selectSecondIDUser = new Select(roomReservationPages.secondSelectIdUSer);
         selectSecondIDUser.selectByValue("34");
-        roomReservationPages.price.sendKeys(ConfigReader.getProperty("price"));
+        roomReservationPages.price.sendKeys(ConfigReader.getProperty("roomreservation_price"));
         roomReservationPages.dateStart.sendKeys("11/17/2021");
         roomReservationPages.dataEnd.sendKeys("11/26/2021");
         roomReservationPages.adultAmount.sendKeys("2");
@@ -57,8 +55,6 @@ public class US008_Orcun_Hotel {
         wait.until(ExpectedConditions.visibilityOf(roomReservationPages.popupMessage));
         Assert.assertTrue(roomReservationPages.popupMessage.isDisplayed());
         roomReservationPages.clickOk.click();
-
-
     }
 
 }
