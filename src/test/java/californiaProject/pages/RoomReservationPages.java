@@ -15,28 +15,7 @@ public class RoomReservationPages {
         PageFactory.initElements(Driver.getDriver(), this);
     }
     //mainpage login button linktext
-    @FindBy (linkText = "Log in")
-    public WebElement mainPageLoginLink;
 
-    //login page username xpath
-    @FindBy (xpath = "//input[@id='UserName']")
-    public WebElement userName;
-
-    //login page password xpath
-    @FindBy(xpath = "//input[@id='Password']")
-    public WebElement passWord;
-
-    //login page log in button xpath
-    @FindBy(xpath = "//input[@id='btnSubmit']")
-    public WebElement logInButton;
-
-    //home managemenet
-    @FindBy (linkText = "Hotel Management")
-    public WebElement homeManagement;
-
-    //room reservation
-    @FindBy (linkText = "Room reservations")
-    public WebElement roomReservations;
 
     //add room reservation
     @FindBy (xpath = "//span[@class=\"hidden-480\"]")
@@ -101,6 +80,10 @@ public class RoomReservationPages {
     //successfully message
     @FindBy(xpath = "//div[.='RoomReservation was inserted successfully']")
     public WebElement popupMessage;
+
+    //error message
+    @FindBy (xpath = "//label[.='Please provide correct email address']")
+    public WebElement emailError;
 
     //ok popup
     @FindBy(xpath = "//button[@class=\"btn btn-primary\"]")

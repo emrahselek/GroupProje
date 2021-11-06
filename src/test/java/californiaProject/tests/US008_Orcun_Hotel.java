@@ -1,43 +1,31 @@
 package californiaProject.tests;
 
+import californiaProject.pages.AdminPages;
+import californiaProject.pages.MainPages;
 import californiaProject.pages.RoomReservationPages;
-import californiaProject.utilities.ConfigReader;
-import californiaProject.utilities.Driver;
-import californiaProject.utilities.ReusableMethods;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
+import californiaProject.utilities.*;
+import org.openqa.selenium.support.ui.*;
+import static org.testng.Assert.*;
+import org.testng.annotations.*;
 
 public class US008_Orcun_Hotel {
 
-    RoomReservationPages roomReservationPages;
+    RoomReservationPages roomReservationPages ;
+    AdminPages adminPages;
 
     @BeforeMethod
-    public void setUp() throws InterruptedException {
-        roomReservationPages = new RoomReservationPages();
-        Driver.getDriver().get(ConfigReader.getProperty("test_url"));
-        Driver.getDriver().manage().window().maximize();
-        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        roomReservationPages.mainPageLoginLink.click();
-        roomReservationPages.userName.sendKeys(ConfigReader.getProperty("manager_username"));
-        roomReservationPages.passWord.sendKeys(ConfigReader.getProperty("manager_password"));
-        Thread.sleep(1000);
-        roomReservationPages.logInButton.click();
+    public void setUp(){
+        MainPages.adminSetUp("manager_username", "manager_password");
     }
     @Test (priority = 0)
     public void us08_TC001() throws InterruptedException {
-        roomReservationPages.homeManagement.click();
-        roomReservationPages.roomReservations.click();
+        roomReservationPages = new RoomReservationPages();
+        adminPages = new AdminPages();
+        adminPages.homeManagement.click();
+        adminPages.roomReservations.click();
         roomReservationPages.addRoomReservation.click();
-        Select selectFirstIDUser = new Select(roomReservationPages.firstSelectIdUSer);
-        selectFirstIDUser.selectByVisibleText("manager");
-        Select selectSecondIDUser = new Select(roomReservationPages.secondSelectIdUSer);
-        selectSecondIDUser.selectByValue("34");
+        ReusableMethods.selectFromDropDown(roomReservationPages.firstSelectIdUSer, "manager");
+        ReusableMethods.seletFromDropDown(roomReservationPages.secondSelectIdUSer, "34");
         roomReservationPages.price.sendKeys(ConfigReader.getProperty("roomreservation_price"));
         roomReservationPages.dateStart.sendKeys("11/17/2021");
         roomReservationPages.dataEnd.sendKeys("11/26/2021");
@@ -53,8 +41,39 @@ public class US008_Orcun_Hotel {
         roomReservationPages.saveButton.click();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         wait.until(ExpectedConditions.visibilityOf(roomReservationPages.popupMessage));
-        Assert.assertTrue(roomReservationPages.popupMessage.isDisplayed());
+        assertTrue(roomReservationPages.popupMessage.isDisplayed());
         roomReservationPages.clickOk.click();
+    }
+    @Test (priority = 1)
+    public void us08_TC002(){
+        roomReservationPages = new RoomReservationPages();
+        adminPages = new AdminPages();
+        adminPages.homeManagement.click();
+        adminPages.roomReservations.click();
+        roomReservationPages.addRoomReservation.click();
+        ReusableMethods.selectFromDropDown(roomReservationPages.firstSelectIdUSer, "manager");
+        ReusableMethods.seletFromDropDown(roomReservationPages.secondSelectIdUSer, "34");
+        roomReservationPages.price.sendKeys(ConfigReader.getProperty("roomreservation_price"));
+        roomReservationPages.dateStart.sendKeys("11/17/2021");
+        roomReservationPages.dataEnd.sendKeys("11/26/2021");
+        roomReservationPages.adultAmount.sendKeys("2");
+        roomReservationPages.childrenAmount.sendKeys("2");
+        roomReservationPages.contactNameSurname.sendKeys("Violet Vivaldi");
+        roomReservationPages.contactPhone.sendKeys("477-432-4466");
+        roomReservationPages.contactEmail.sendKeys("");
+        roomReservationPages.notes.sendKeys("This is a notes");
+        roomReservationPages.approved.click();
+        roomReservationPages.isPaid.click();
+        ReusableMethods.waitFor(2);
+        roomReservationPages.saveButton.click();
+        WebDriverWait emailwait = new WebDriverWait(Driver.getDriver(), 10);
+        emailwait.until(ExpectedConditions.visibilityOf(roomReservationPages.emailError));
+        assertTrue(roomReservationPages.emailError.isDisplayed());
+    }
+
+    @AfterMethod
+    public void tearDown(){
+        Driver.closeDriver();
     }
 
 }
