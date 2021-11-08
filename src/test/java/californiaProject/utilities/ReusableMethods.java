@@ -162,4 +162,23 @@ public class ReusableMethods {
         select.selectByIndex(optionIndex);
         return select.getFirstSelectedOption();
     }
+
+    //Check to the assert result
+    public static boolean IsTrue(WebElement webElement, String checkText){
+        return webElement.getText().contains(checkText);
+    }
+
+    public static void selectFromDropDown(WebElement selectData, String selectOption){
+        Select selectElement = new Select(selectData);
+        selectElement.selectByVisibleText(selectOption);
+    }
+
+    public static void selectFromDropDown(WebElement selectData, int indexNumber){
+        Select selectElement = new Select(selectData);
+        selectElement.selectByIndex(indexNumber);
+    }
+    public static void seletFromDropDown (WebElement selectData, String value){
+        Select selectElement = new Select(selectData);
+        selectElement.selectByValue(value);
+    }
 }
