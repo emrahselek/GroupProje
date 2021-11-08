@@ -1,12 +1,8 @@
 package californiaProject.utilities;
-
 import java.io.FileInputStream;
 import java.util.Properties;
-
 public class ConfigReader {
-
     private static Properties properties;
-
     static {
         String path = "configuration.properties";
         try {
@@ -18,7 +14,6 @@ public class ConfigReader {
             properties.load(fileInputStream);
             //closing the file
             fileInputStream.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,6 +21,4 @@ public class ConfigReader {
     public static String getProperty(String key){
         return properties.getProperty(key);
     }
-
-
 }
