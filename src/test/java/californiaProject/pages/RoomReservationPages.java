@@ -85,6 +85,11 @@ public class RoomReservationPages {
     @FindBy (xpath = "//label[.='Please provide correct email address']")
     public WebElement emailError;
 
+    //contact phone mesasge esser
+    @FindBy (xpath = "//label[normalize-space()='Contact Phone']")
+    public WebElement contactPhoneError;
+
+
     //ok popup
     @FindBy(xpath = "//button[@class=\"btn btn-primary\"]")
     public WebElement clickOk;
