@@ -21,12 +21,12 @@ public class US0005_Bilal_Hotel {
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //1-Enter Concorthotel as a manager
-        roomReservationPages.mainPageLoginLink.click();
+        hotelListPages.mainPageLoginLink.click();
 
-        roomReservationPages.userName.sendKeys(ConfigReader.getProperty("manager_username"));
-        roomReservationPages.passWord.sendKeys(ConfigReader.getProperty("manager_password"));
+        hotelListPages.userName.sendKeys(ConfigReader.getProperty("manager_username"));
+        hotelListPages.passWord.sendKeys(ConfigReader.getProperty("manager_password"));
         Thread.sleep(1000);
-        roomReservationPages.logInButton.click();
+        hotelListPages.logInButton.click();
 
     }
 @Test
